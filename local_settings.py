@@ -9,7 +9,7 @@ MY_ACCESS_TOKEN_KEY = '524534295-paB2f56UV68r81V3P7DG8gVxE7vcAbiwZ6gJCRXU'
 MY_ACCESS_TOKEN_SECRET = 'Jt6BlmTDoKdKl0t7VJ8MbHUX7EhuImNx2LV4AodOobM87'
 
 SOURCE_ACCOUNTS = ["SiliconHBO", "HouseOfCards", "Frank_Underwood", "BarackObama", "SeinfeldToday"] #A list of comma-separated, quote-enclosed Twitter handles of account that you'll generate tweets based on. It should look like ["account1", "account2"]. If you want just one account, no comma needed.
-ODDS = 0  #How often do you want this to run? 1/8 times?
+ODDS = 1  #How often do you want this to run? 1/8 times?
 ORDER = 1 #how closely do you want this to hew to sensical? 1 is low and 3 is high.
 DEBUG = False #Set this to False to start Tweeting live
 STATIC_TEST = False #Set this to True if you want to test Markov generation from a static file instead of the API.
