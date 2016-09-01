@@ -47,12 +47,19 @@ def filter_tweet(tweet):
                                                     
 def grab_tweets(api, max_id=None):
     source_tweets=[]
-    user_tweets = api.GetUserTimeline(screen_name=user, count=200, max_id=max_id, include_rts=True, trim_user=True, exclude_replies=True)
-    max_id = user_tweets[len(user_tweets)-1].id-1
-    for tweet in user_tweets:
-        tweet.text = filter_tweet(tweet)
-        if len(tweet.text) != 0:
-            source_tweets.append(tweet.text)
+    max_id = None
+    user_tweets = api.GetUserTimeline(
+        screen_name=user, count=200, max_id=max_id, include_rts=True, 
+        trim_user=True, exclude_replies=True)
+    # you can use an if to prevent the error
+    if len(user_tweets):
+        max_id = user_tweets[len(user_tweets)-1].id-1
+
+        for tweet in user_tweets:
+            tweet.text = filter_tweet(tweet)
+            if len(tweet.text) != 0:    
+                source_tweets.append(tweet.text)
+
     return source_tweets, max_id
 
 if __name__=="__main__":
@@ -115,13 +122,7 @@ if __name__=="__main__":
                 ebook_tweet = ebook_tweet.upper()
 
         #throw out tweets that match anything from the source account.
-        if ebook_tweet != None and len(ebook_tweet) < 110:
-            for tweet in source_tweets:
-                if ebook_tweet[:-1] not in tweet:
-                    continue
-                else: 
-                    print "TOO SIMILAR: " + ebook_tweet
-                    sys.exit()
+        if ebook_tweet != None and len(ebook_tweet) < 125:
                           
             if DEBUG == False:
                 status = api.PostUpdate(ebook_tweet)
